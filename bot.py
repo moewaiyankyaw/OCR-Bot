@@ -10,7 +10,7 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "8235129652:AAF8iQBtohRglzC_ZiXIpK0
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyCqPjYMV1FYaoxmyj49oFc93k356CxWZkI")
 
 # Gemini API endpoint
-GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 # Initialize bot
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
@@ -52,7 +52,7 @@ def extract_text_with_gemini(image_bytes):
                             }
                         },
                         {
-                            "text": "Extract all visible text. If there are math equations, formulas, numbers, or symbols, highlight them clearly. And I want to rearrange and format beautified to the maths expression. And I want to also allow for Burmese Language."
+                            "text": "Extract all visible text. If there are math equations, formulas, numbers, or symbols, highlight them clearly. And I want to rearrange and format beautified to the maths expression. Don't express the maths with special syntax , like - $\frac{1}{2}.Only send me extracted Text Only without any text messages."
                         }
                     ]
                 }
@@ -71,7 +71,7 @@ def extract_text_with_gemini(image_bytes):
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "📸 Send me an image! I'll extract text (especially math) using AI — no files saved!")
+    bot.reply_to(message, "📸 Send me an image! I'll extract text (especially math) using AI")
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
